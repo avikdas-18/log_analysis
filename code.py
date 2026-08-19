@@ -77,10 +77,66 @@ SIGNAL_MAP = {
     "Current_Feedback": "Current_Feedback",
 }
 
+# Calibration constants used in the power/efficiency calculations below.
+Efficiency_of_hyd_to_mech = 0.92
+Cal_EngineMax_trq = 90
+Generator_Sys_efficiency = 0.81
 # Calculated columns: name -> function that receives the resampled DataFrame
 # and returns a new Series. Add as many as you like.
+# NOTE: these run in order (top to bottom), and each function can reference
+# any column added by a PREVIOUS entry in this dict (e.g. Current_Summation
+# below uses the Battery_Charging_Status column computed just above it).
 CALCULATED_SIGNALS = {
     "Generator_power": lambda df: df["GC_DC_CURR"] * df["GC_DC_VOLT"],
+
+    # "Charging" if the generator DC bus voltage is higher than the pack
+    # voltage (current flows into the pack), "Discharging" if lower.
+    # When they're exactly equal, marked "Equal" (edge case not specified).
+    "Battery_Charging_Status": lambda df: np.select(
+        [df["GC_DC_VOLT"] > df["Unswitched_Pack_Voltage"],
+         df["GC_DC_VOLT"] < df["Unswitched_Pack_Voltage"]],
+        ["Charging", "Discharging"],
+        default="Equal",
+    ),
+
+    # Current balance check: compares the generator/motor/pack currents
+    # depending on which direction power is currently flowing.
+    "Current_Summation": lambda df: np.select(
+        [df["Battery_Charging_Status"] == "Charging",
+         df["Battery_Charging_Status"] == "Discharging"],
+        [df["GC_DC_CURR"] - (df["DCCurrentA"] + df["Pack_Current"]),
+         df["DCCurrentA"] - (df["GC_DC_CURR"] + df["Pack_Current"])],
+        default=np.nan,
+    ),
+
+    # Mechanical power delivered by the engine, from its max torque rating
+    # and generator speed. (2*pi*T*N)/60 is the standard rotational power
+    # formula, converting rpm to rad/s.
+    "Mechanical_Power_output": lambda df: (
+        2 * 3.141 * Cal_EngineMax_trq * df["GC_GENERATOR_SPEED"] * Efficiency_of_hyd_to_mech
+    ) / 60,
+
+    # Hydraulic pump/motor displacement, derived from the measured current
+    # feedback (mA) via a linear calibration: (I - 400) * 0.125.
+    "Displacement_in_cc": lambda df: (df["Current_Feedback"] - 400) * 0.125,
+
+    # Hydraulic power delivered mechanically, from displacement, pressure,
+    # and generator speed.
+    "Hydraulic_power_to_mechanical": lambda df: (
+        df["Displacement_in_cc"] * df["Pressure_Proc"] * df["GC_GENERATOR_SPEED"]
+    ) / 600,
+
+    # Actual hydraulic power output, correcting for hydraulic-to-mechanical
+    # conversion losses.
+    "Actual_hydraulic_power_output": lambda df: (
+        df["Hydraulic_power_to_mechanical"] / Efficiency_of_hyd_to_mech
+    ),
+
+    # Power left over for the generator after hydraulic power is subtracted
+    # from total mechanical power, scaled by the generator system efficiency.
+    "Calculated_available_power_for_generator": lambda df: (
+        (df["Mechanical_Power_output"] - df["Actual_hydraulic_power_output"]) * Generator_Sys_efficiency
+    ),
 }
 
 
