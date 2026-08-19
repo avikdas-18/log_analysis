@@ -25,25 +25,37 @@ What this script does
 
 Usage
 -----
-    python3 can_log_analyzer.py input.csv output.csv --interval 0.1
+Set the two variables below (input file name and output time interval),
+then just run:
+    python3 can_log_analyzer.py
 
 Customize the SIGNAL_MAP and CALCULATED_SIGNALS sections below for your project.
 """
 
-import argparse
-import sys
+import os
 import numpy as np
 import pandas as pd
 
 
 # ---------------------------------------------------------------------------
-# 1. CONFIGURATION - edit this section for your project's signal list
+# 1. CONFIGURATION - edit this section for your project
 # ---------------------------------------------------------------------------
 
-# CALIBRATION: time gap (in seconds) between two consecutive output rows.
-# This is the single knob that controls the output logging rate.
-# Change this value to re-calibrate the tool (e.g. 0.1 for 100ms, 0.5, 5, ...).
-SAMPLE_INTERVAL_SECONDS = 1.0
+# VARIABLE 1: input log file name (the CAN log CSV to read)
+INPUT_LOG_FILE = "sample_data.csv"
+
+# VARIABLE 2: time interval between two consecutive output rows, in seconds
+# (this is the calibratable output logging rate, e.g. 1.0 = every 1 second,
+# 0.1 = every 100ms, 5.0 = every 5 seconds, ...)
+OUTPUT_TIME_INTERVAL = 1.0
+
+# Output path: folder where the output CSV should be saved.
+# Use "" (empty string) or "." to save in the current folder.
+# Examples: "output", "/mnt/user-data/outputs", "C:/Users/me/Desktop/logs"
+OUTPUT_FOLDER = ""
+
+# Output file name (just the file name, not the full path)
+OUTPUT_FILE_NAME = "resampled_output.csv"
 
 # Map: output column name -> short signal name to search for in the CSV header.
 # The search matches the text between the last "::" and an optional "[unit]"
@@ -179,20 +191,11 @@ def add_calculated_signals(df, calculated_signals):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Extract and resample CAN signals from a triplet-format log CSV.")
-    parser.add_argument("input_csv", help="Path to the input CAN log CSV")
-    parser.add_argument("output_csv", help="Path to write the resampled output CSV")
-    parser.add_argument("--interval", type=float, default=SAMPLE_INTERVAL_SECONDS,
-                         help=f"Resample interval in seconds "
-                              f"(default: {SAMPLE_INTERVAL_SECONDS}s, set by the "
-                              f"SAMPLE_INTERVAL_SECONDS calibration constant at the top of this script)")
-    args = parser.parse_args()
+    print(f"Loading signals from {INPUT_LOG_FILE} ...")
+    series_dict = load_signals(INPUT_LOG_FILE, SIGNAL_MAP)
 
-    print(f"Loading signals from {args.input_csv} ...")
-    series_dict = load_signals(args.input_csv, SIGNAL_MAP)
-
-    print(f"\nResampling to a common {args.interval}s grid (hold-last-value)...")
-    df = resample_to_common_grid(series_dict, args.interval)
+    print(f"\nResampling to a common {OUTPUT_TIME_INTERVAL}s grid (hold-last-value)...")
+    df = resample_to_common_grid(series_dict, OUTPUT_TIME_INTERVAL)
 
     print("Computing calculated signals...")
     df = add_calculated_signals(df, CALCULATED_SIGNALS)
@@ -202,8 +205,15 @@ def main():
     ordered_cols += [c for c in CALCULATED_SIGNALS.keys() if c in df.columns]
     df = df[ordered_cols]
 
-    df.to_csv(args.output_csv, float_format="%.4f")
-    print(f"\nDone. Wrote {len(df)} rows x {len(df.columns)} columns to {args.output_csv}")
+    # Build the full output path, creating the destination folder if needed
+    if OUTPUT_FOLDER and OUTPUT_FOLDER != ".":
+        os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+        output_path = os.path.join(OUTPUT_FOLDER, OUTPUT_FILE_NAME)
+    else:
+        output_path = OUTPUT_FILE_NAME
+
+    df.to_csv(output_path, float_format="%.4f")
+    print(f"\nDone. Wrote {len(df)} rows x {len(df.columns)} columns to {output_path}")
 
 
 if __name__ == "__main__":
