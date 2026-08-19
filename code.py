@@ -1,0 +1,210 @@
+"""
+CAN Log Analyzer
+=================
+Automates extraction of specific CAN signals from a "triplet-format" CSV log
+(the common CANape/CANoe/vehicle-logger export where EACH signal has its own
+Time[s] column, its own value column, and a blank spacer column, because
+signals are transmitted asynchronously on the bus).
+
+Header pattern (repeats every 3 columns):
+    Time[s], <DBC>::<Message>::<SignalName>[unit], ,  Time[s], <next signal>, , ...
+
+What this script does
+----------------------
+1. Reads the CSV (handles Latin-1 encoding, which is common for these exports).
+2. Auto-locates each signal you ask for by matching its short name
+   (e.g. "DCCurrentA") against the full column header
+   (e.g. "G05 DBC_V1_0_latest::TM_MCU_STATUS_3::DCCurrentA[A]").
+3. Extracts each signal as its own (time, value) series (dropping the blank
+   padding rows that occur because different signals log at different rates).
+4. Resamples every signal onto ONE common time grid at a fixed interval,
+   using "hold last value" (forward-fill) - the standard way to resample CAN
+   data, since a signal's value is valid until the next time it's transmitted.
+5. Computes any calculated/derived signals (e.g. Generator power = I * V).
+6. Writes a single tidy CSV: one row per timestamp, one column per signal.
+
+Usage
+-----
+    python3 can_log_analyzer.py input.csv output.csv --interval 0.1
+
+Customize the SIGNAL_MAP and CALCULATED_SIGNALS sections below for your project.
+"""
+
+import argparse
+import sys
+import numpy as np
+import pandas as pd
+
+
+# ---------------------------------------------------------------------------
+# 1. CONFIGURATION - edit this section for your project's signal list
+# ---------------------------------------------------------------------------
+
+# CALIBRATION: time gap (in seconds) between two consecutive output rows.
+# This is the single knob that controls the output logging rate.
+# Change this value to re-calibrate the tool (e.g. 0.1 for 100ms, 0.5, 5, ...).
+SAMPLE_INTERVAL_SECONDS = 1.0
+
+# Map: output column name -> short signal name to search for in the CSV header.
+# The search matches the text between the last "::" and an optional "[unit]"
+# suffix, so you don't need to type the full DBC::Message::Signal[unit] path.
+SIGNAL_MAP = {
+    "DCCurrentA": "DCCurrentA",
+    "DCVoltageV": "DCVoltageV",
+    "MotorTorque": "MotorTorque",
+    "Motorspeed": "Motorspeed",
+    "GC_DC_VOLT": "GC_DC_VOLT",
+    "GC_DC_CURR": "GC_DC_CURR",
+    "GC_DC_CURR_PREC_IN": "GC_DC_CURR_PERC_IN",   # note: source file spells this PERC not PREC
+    "GC_GENERATOR_SPEED": "GC_GENERATOR_SPEED",
+    "Pack_Current": "Pack_Current",
+    "Switched_Pack_Voltage": "Switched_Pack_Voltage",
+    "Unswitched_Pack_Voltage": "Unswitched_Pack_Voltage",
+    "Dbug_Avbl_Power_Dc_watt_out": "Dbug_Avbl_Power_Dc_watt_out",
+    "Pressure_Proc": "Pressure_Proc",
+    "Current_Feedback": "Current_Feedback",
+}
+
+# Calculated columns: name -> function that receives the resampled DataFrame
+# and returns a new Series. Add as many as you like.
+CALCULATED_SIGNALS = {
+    "Generator_power": lambda df: df["GC_DC_CURR"] * df["GC_DC_VOLT"],
+}
+
+
+# ---------------------------------------------------------------------------
+# 2. CORE LOGIC - generally no need to edit below this line
+# ---------------------------------------------------------------------------
+
+def detect_encoding_and_read_header(path):
+    """These logger exports are frequently Latin-1 / Windows-1252, not UTF-8."""
+    for enc in ("utf-8", "latin-1", "cp1252"):
+        try:
+            with open(path, encoding=enc) as f:
+                header = f.readline().strip().split(",")
+            return enc, header
+        except UnicodeDecodeError:
+            continue
+    raise RuntimeError(f"Could not decode {path} with utf-8/latin-1/cp1252")
+
+
+def find_signal_column(header, short_name):
+    """
+    Locate the value-column index for a signal given its short name.
+    Matches "...::<short_name>" or "...::<short_name>[unit]".
+    Returns the column index of the VALUE column (time column is index-1).
+    """
+    for i, col in enumerate(header):
+        if col.endswith("::" + short_name) or ("::" + short_name + "[") in col:
+            return i
+    return None
+
+
+def extract_signal_series(df, value_col_idx):
+    """
+    Given the raw (headerless) dataframe and a value column index, return a
+    clean (time, value) pandas Series, dropping the blank padding rows.
+    """
+    time_col_idx = value_col_idx - 1
+    t = pd.to_numeric(df[time_col_idx], errors="coerce")
+    v = pd.to_numeric(df[value_col_idx], errors="coerce")
+    mask = t.notna() & v.notna()
+    t, v = t[mask], v[mask]
+    # Guard against duplicate/out-of-order timestamps
+    series = pd.Series(v.values, index=t.values).sort_index()
+    series = series[~series.index.duplicated(keep="last")]
+    return series
+
+
+def load_signals(csv_path, signal_map):
+    """Read the CSV and extract each requested signal as a raw time series."""
+    encoding, header = detect_encoding_and_read_header(csv_path)
+    print(f"Detected encoding: {encoding}")
+
+    raw = pd.read_csv(csv_path, encoding=encoding, header=None, skiprows=1, low_memory=False)
+
+    series_dict = {}
+    missing = []
+    for out_name, short_name in signal_map.items():
+        idx = find_signal_column(header, short_name)
+        if idx is None:
+            missing.append((out_name, short_name))
+            continue
+        s = extract_signal_series(raw, idx)
+        series_dict[out_name] = s
+        print(f"  Found '{out_name}' (matched '{short_name}') -> "
+              f"{len(s)} samples, t=[{s.index.min():.3f}, {s.index.max():.3f}]s")
+
+    if missing:
+        print("\nWARNING: the following signals were NOT found in the CSV header:")
+        for out_name, short_name in missing:
+            print(f"  - {out_name} (searched for '{short_name}')")
+
+    return series_dict
+
+
+def resample_to_common_grid(series_dict, interval):
+    """
+    Build one common time grid spanning the union of all signals' time ranges,
+    then hold-last-value (forward-fill) each signal onto that grid.
+    """
+    if not series_dict:
+        raise RuntimeError("No signals were successfully extracted - nothing to resample.")
+
+    t_min = min(s.index.min() for s in series_dict.values())
+    t_max = max(s.index.max() for s in series_dict.values())
+    grid = np.arange(t_min, t_max + interval, interval)
+
+    out = pd.DataFrame(index=grid)
+    out.index.name = "Time[s]"
+
+    for name, s in series_dict.items():
+        # reindex onto the union of existing timestamps + grid, ffill, then
+        # sample exactly at the grid points (this correctly "holds" the last
+        # transmitted value rather than interpolating between transitions)
+        combined_index = s.index.union(grid)
+        held = s.reindex(combined_index).ffill()
+        out[name] = held.reindex(grid).values
+
+    return out
+
+
+def add_calculated_signals(df, calculated_signals):
+    for name, fn in calculated_signals.items():
+        try:
+            df[name] = fn(df)
+        except KeyError as e:
+            print(f"WARNING: could not compute '{name}' - missing input signal {e}")
+    return df
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Extract and resample CAN signals from a triplet-format log CSV.")
+    parser.add_argument("input_csv", help="Path to the input CAN log CSV")
+    parser.add_argument("output_csv", help="Path to write the resampled output CSV")
+    parser.add_argument("--interval", type=float, default=SAMPLE_INTERVAL_SECONDS,
+                         help=f"Resample interval in seconds "
+                              f"(default: {SAMPLE_INTERVAL_SECONDS}s, set by the "
+                              f"SAMPLE_INTERVAL_SECONDS calibration constant at the top of this script)")
+    args = parser.parse_args()
+
+    print(f"Loading signals from {args.input_csv} ...")
+    series_dict = load_signals(args.input_csv, SIGNAL_MAP)
+
+    print(f"\nResampling to a common {args.interval}s grid (hold-last-value)...")
+    df = resample_to_common_grid(series_dict, args.interval)
+
+    print("Computing calculated signals...")
+    df = add_calculated_signals(df, CALCULATED_SIGNALS)
+
+    # nice column order: requested signals in original order, then calculated ones
+    ordered_cols = [c for c in SIGNAL_MAP.keys() if c in df.columns]
+    ordered_cols += [c for c in CALCULATED_SIGNALS.keys() if c in df.columns]
+    df = df[ordered_cols]
+
+    df.to_csv(args.output_csv, float_format="%.4f")
+    print(f"\nDone. Wrote {len(df)} rows x {len(df.columns)} columns to {args.output_csv}")
+
+
+if __name__ == "__main__":
+    main()
