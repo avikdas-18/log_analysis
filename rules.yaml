@@ -1,0 +1,33 @@
+# Domain knowledge: map human concepts to precise signal conditions.
+# Edit this file with your team's real signal names and thresholds.
+# `logic` can be AND or OR when there are multiple conditions.
+
+concepts:
+  - name: "generator operational"
+    description: "The generator is running and producing power"
+    logic: AND
+    conditions:
+      - signal: "GEN_CURRENT"
+        operator: ">"
+        threshold: 5.0
+      - signal: "GEN_VOLTAGE"
+        operator: ">"
+        threshold: 200.0
+
+  - name: "battery low"
+    description: "Battery state of charge is low"
+    logic: AND
+    conditions:
+      - signal: "BATT_SOC"
+        operator: "<"
+        threshold: 20.0
+
+  - name: "engine overheating"
+    description: "Engine coolant temperature exceeds safe range"
+    logic: AND
+    conditions:
+      - signal: "ENGINE_COOLANT_TEMP"
+        operator: ">"
+        threshold: 105.0
+
+# Add more concepts below following the same pattern.
