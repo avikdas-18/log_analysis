@@ -54,6 +54,9 @@ class LogAnalyzer:
             "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==').\n"
             "   - \"value\": The numerical threshold value (float).\n"
             "- \"duration\": The duration in seconds the condition must hold (float). If not specified, use 0.0.\n\n"
+            "Example:\n"
+            "User: \"Give me logs where GC_DC_CURR is greater than 7A and less than 10A\"\n"
+            "Assistant: {\"signal\": \"GC_DC_CURR\", \"conditions\": [{\"operator\": \">\", \"value\": 7.0}, {\"operator\": \"<\", \"value\": 10.0}], \"duration\": 0.0}\n\n"
             "Respond ONLY with the JSON object. Do not add markdown or explanations."
         )
         

@@ -41,7 +41,7 @@ st.markdown("""
         background-color: transparent;
     }
     div[data-testid="stChatInput"] {
-        background-color: #1e212b !important;
+        background-color: black !important;
         border: 1px solid #3a7bd5 !important;
         border-radius: 8px !important;
     }
