@@ -56,11 +56,8 @@ def load_analyzer(data_paths):
         return LogAnalyzer(list(data_paths))
     return None
 
-st.markdown("### Data Source Configuration")
-folder_path = st.text_input(
-    "Enter folder path containing log files (or leave blank to use default):", 
-    placeholder="e.g., C:\\path\\to\\logs"
-)
+# Hardcoded folder path containing CSV logs
+folder_path = r"C:\path\to\your\log\folder" # TODO: Update this path to your actual folder
 
 analyzer = None
 if folder_path:
@@ -89,28 +86,71 @@ else:
         st.success(f"✅ Loaded analyzer with {len(analyzer.signals)} signals.")
     
     st.markdown("### Ask a Question")
-    query = st.text_input("Enter your query (e.g. 'Give me the logs where pack_current signal value exceeds 80A')", 
-                          placeholder="Type your natural language query here...")
     
-    if st.button("Analyze Logs"):
-        if query:
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+        
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            if msg["role"] == "user":
+                st.markdown(msg["content"])
+            else:
+                if "error" in msg:
+                    st.error(msg["error"])
+                else:
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        st.metric("Target Signal", msg["matched_signal"])
+                    with col2:
+                        st.metric("Condition", msg["condition_str"])
+                    with col3:
+                        st.metric("Duration Constraint", msg["duration_str"])
+                        
+                    if msg["results_df"].empty:
+                        st.info("No logs matched the specified condition.")
+                    else:
+                        friendly_cond = msg.get("friendly_condition", msg["condition_str"])
+                        st.markdown(f"**Answer**: In the following logs the value of **{msg['matched_signal']}** is **{friendly_cond}**.")
+                        st.dataframe(msg["results_df"], use_container_width=True)
+                        
+                        csv = msg["results_df"].to_csv(index=False).encode('utf-8')
+                        st.download_button(
+                            label="📥 Download Results as CSV",
+                            data=csv,
+                            file_name='analysis_results.csv',
+                            mime='text/csv',
+                            key=f"dl_{msg['id']}"
+                        )
+    
+    if query := st.chat_input("Enter your query (e.g. 'Give me the logs where pack_current signal value exceeds 80A')"):
+        st.session_state.messages.append({"role": "user", "content": query})
+        with st.chat_message("user"):
+            st.markdown(query)
+            
+        with st.chat_message("assistant"):
             with st.spinner("🧠 AI is analyzing the query..."):
                 try:
                     results_df, condition, matched_signal = analyzer.evaluate_condition(query)
                     
-                    st.markdown("### AI Analysis Results")
+                    condition_str = " AND ".join([f"{c['operator']} {c['value']}" for c in condition['conditions']])
+                    
+                    mapping = {'>': 'greater than', '<': 'less than', '>=': 'greater than or equal to', '<=': 'less than or equal to', '==': 'equal to'}
+                    friendly_condition = " and ".join([f"{mapping.get(c['operator'], c['operator'])} {c['value']}" for c in condition['conditions']])
+                    duration_str = f"{condition['duration']} seconds" if condition.get('duration', 0) > 0 else "None"
+                    msg_id = len(st.session_state.messages)
+                    
                     col1, col2, col3 = st.columns(3)
                     with col1:
                         st.metric("Target Signal", matched_signal)
                     with col2:
-                        st.metric("Condition", f"{condition['operator']} {condition['value']}")
+                        st.metric("Condition", condition_str)
                     with col3:
-                        st.metric("Duration Constraint", f"{condition['duration']} seconds" if condition.get('duration', 0) > 0 else "None")
+                        st.metric("Duration Constraint", duration_str)
                     
                     if results_df.empty:
                         st.info("No logs matched the specified condition.")
                     else:
-                        st.markdown(f"**Found {len(results_df)} matching instances:**")
+                        st.markdown(f"**Answer**: In the following logs the value of **{matched_signal}** is **{friendly_condition}**.")
                         st.dataframe(results_df, use_container_width=True)
                         
                         csv = results_df.to_csv(index=False).encode('utf-8')
@@ -119,8 +159,21 @@ else:
                             data=csv,
                             file_name='analysis_results.csv',
                             mime='text/csv',
+                            key=f"dl_{msg_id}"
                         )
+                        
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "matched_signal": matched_signal,
+                        "condition_str": condition_str,
+                        "friendly_condition": friendly_condition,
+                        "duration_str": duration_str,
+                        "results_df": results_df,
+                        "id": msg_id
+                    })
                 except Exception as e:
                     st.error(f"Error during analysis: {e}")
-        else:
-            st.warning("Please enter a query.")
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "error": f"Error during analysis: {e}"
+                    })

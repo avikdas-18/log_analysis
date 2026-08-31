@@ -50,8 +50,9 @@ class LogAnalyzer:
             "You are a helpful data analysis assistant. Extract parameters from the user's query into a strict JSON format.\n"
             "The JSON must contain exactly these keys:\n"
             "- \"signal\": The name of the signal being queried (string).\n"
-            "- \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==').\n"
-            "- \"value\": The numerical threshold value (float).\n"
+            "- \"conditions\": A list of condition objects, where each object has:\n"
+            "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==').\n"
+            "   - \"value\": The numerical threshold value (float).\n"
             "- \"duration\": The duration in seconds the condition must hold (float). If not specified, use 0.0.\n\n"
             "Respond ONLY with the JSON object. Do not add markdown or explanations."
         )
@@ -90,8 +91,7 @@ class LogAnalyzer:
         time_col = self.columns[time_idx]
         val_col = matched_signal
         
-        op = condition['operator']
-        thresh = condition['value']
+
         duration = condition.get('duration', 0.0)
         
         all_results = []
@@ -110,18 +110,22 @@ class LogAnalyzer:
                 values = df[val_col].values
                 
                 # Apply boolean condition
-                if op == '>':
-                    bool_arr = values > thresh
-                elif op == '<':
-                    bool_arr = values < thresh
-                elif op == '>=':
-                    bool_arr = values >= thresh
-                elif op == '<=':
-                    bool_arr = values <= thresh
-                elif op == '==':
-                    bool_arr = values == thresh
-                else:
-                    raise ValueError(f"Unknown operator {op}")
+                bool_arr = np.ones(len(values), dtype=bool)
+                for cond in condition['conditions']:
+                    op = cond['operator']
+                    thresh = cond['value']
+                    if op == '>':
+                        bool_arr &= (values > thresh)
+                    elif op == '<':
+                        bool_arr &= (values < thresh)
+                    elif op == '>=':
+                        bool_arr &= (values >= thresh)
+                    elif op == '<=':
+                        bool_arr &= (values <= thresh)
+                    elif op == '==':
+                        bool_arr &= (values == thresh)
+                    else:
+                        raise ValueError(f"Unknown operator {op}")
                     
                 if duration <= 0:
                     # Simple threshold check
