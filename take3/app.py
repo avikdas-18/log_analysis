@@ -50,10 +50,10 @@ st.title("⚡ AI RAG CAN Log Analyzer")
 st.markdown("Analyze large CAN datasets using natural language. Powered by local AI.")
 
 @st.cache_resource
-def load_analyzer(data_path):
-    # Load analyzer once and cache it in memory for the given path
-    if os.path.exists(data_path):
-        return LogAnalyzer(data_path)
+def load_analyzer(data_paths):
+    # Load analyzer once and cache it in memory for the given paths
+    if data_paths and all(os.path.exists(p) for p in data_paths):
+        return LogAnalyzer(list(data_paths))
     return None
 
 st.markdown("### Data Source Configuration")
@@ -66,12 +66,11 @@ analyzer = None
 if folder_path:
     if os.path.isdir(folder_path):
         # Scan for CSV files
-        csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+        csv_files = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if f.endswith('.csv')]
         if csv_files:
-            data_file = os.path.join(folder_path, csv_files[0])
-            st.info(f"📂 Found CSV file: {csv_files[0]}")
+            st.info(f"📂 Found {len(csv_files)} CSV files in folder.")
             with st.spinner("Initializing AI Model with data. This might take a moment..."):
-                analyzer = load_analyzer(data_file)
+                analyzer = load_analyzer(tuple(csv_files))
         else:
             st.error("❌ No CSV files found in the specified folder.")
     else:
@@ -79,7 +78,7 @@ if folder_path:
 else:
     default_data = "sample_data.csv"
     if os.path.exists(default_data):
-        analyzer = load_analyzer(default_data)
+        analyzer = load_analyzer((default_data,))
 
 if analyzer is None:
     st.warning("⚠️ Please provide a valid folder path or ensure `sample_data.csv` exists.")

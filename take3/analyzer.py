@@ -10,8 +10,8 @@ import re
 import numpy as np
 
 class LogAnalyzer:
-    def __init__(self, data_path, embedding_model="all-MiniLM-L6-v2", llm_model="Qwen/Qwen2.5-0.5B-Instruct"):
-        self.data_path = data_path
+    def __init__(self, data_paths, embedding_model="all-MiniLM-L6-v2", llm_model="Qwen/Qwen2.5-0.5B-Instruct"):
+        self.data_paths = data_paths
         self.embedding_model = SentenceTransformer(embedding_model)
         
         # Load LLM pipeline (on CPU)
@@ -21,7 +21,7 @@ class LogAnalyzer:
 
         # Read header and identify signals
         print("Analyzing CSV structure...")
-        df_header = pd.read_csv(data_path, encoding='latin1', nrows=0)
+        df_header = pd.read_csv(self.data_paths[0], encoding='latin1', nrows=0)
         self.columns = list(df_header.columns)
         
         # Extract signal columns and map them to their corresponding time columns
@@ -90,60 +90,66 @@ class LogAnalyzer:
         time_col = self.columns[time_idx]
         val_col = matched_signal
         
-        print(f"Reading data for '{matched_signal}'...")
-        # Only load the relevant columns to save memory
-        df = pd.read_csv(self.data_path, encoding='latin1', usecols=[time_col, val_col])
-        
-        # Clean data (drop NaNs due to different cycle times)
-        df = df.dropna(subset=[val_col]).sort_values(by=time_col)
-        
-        times = df[time_col].values
-        values = df[val_col].values
-        
-        # Apply boolean condition
         op = condition['operator']
         thresh = condition['value']
-        if op == '>':
-            bool_arr = values > thresh
-        elif op == '<':
-            bool_arr = values < thresh
-        elif op == '>=':
-            bool_arr = values >= thresh
-        elif op == '<=':
-            bool_arr = values <= thresh
-        elif op == '==':
-            bool_arr = values == thresh
-        else:
-            raise ValueError(f"Unknown operator {op}")
-            
         duration = condition.get('duration', 0.0)
         
-        results = []
-        if duration <= 0:
-            # Simple threshold check
-            matched_indices = np.where(bool_arr)[0]
-            for idx in matched_indices:
-                results.append({"Start_Time": times[idx], "End_Time": times[idx], "Signal": matched_signal, "Value": values[idx]})
-        else:
-            # Duration check (greater than X for more than Y seconds)
-            in_block = False
-            block_start_t = None
-            
-            for i, is_true in enumerate(bool_arr):
-                t = times[i]
-                if is_true and not in_block:
-                    in_block = True
-                    block_start_t = t
-                elif not is_true and in_block:
-                    in_block = False
-                    block_end_t = times[i-1]
-                    if (block_end_t - block_start_t) > duration:
-                        results.append({"Start_Time": block_start_t, "End_Time": block_end_t, "Signal": matched_signal, "Duration": block_end_t - block_start_t})
-            
-            # Check last block
-            if in_block:
-                block_end_t = times[-1]
-                if (block_end_t - block_start_t) > duration:
-                    results.append({"Start_Time": block_start_t, "End_Time": block_end_t, "Signal": matched_signal, "Duration": block_end_t - block_start_t})
+        all_results = []
+        
+        for file_path in self.data_paths:
+            log_name = os.path.basename(file_path)
+            print(f"Reading data for '{matched_signal}' from {log_name}...")
+            try:
+                # Only load the relevant columns to save memory
+                df = pd.read_csv(file_path, encoding='latin1', usecols=[time_col, val_col])
+                
+                # Clean data (drop NaNs due to different cycle times)
+                df = df.dropna(subset=[val_col]).sort_values(by=time_col)
+                
+                times = df[time_col].values
+                values = df[val_col].values
+                
+                # Apply boolean condition
+                if op == '>':
+                    bool_arr = values > thresh
+                elif op == '<':
+                    bool_arr = values < thresh
+                elif op == '>=':
+                    bool_arr = values >= thresh
+                elif op == '<=':
+                    bool_arr = values <= thresh
+                elif op == '==':
+                    bool_arr = values == thresh
+                else:
+                    raise ValueError(f"Unknown operator {op}")
                     
-        return pd.DataFrame(results), condition, matched_signal
+                if duration <= 0:
+                    # Simple threshold check
+                    matched_indices = np.where(bool_arr)[0]
+                    for idx in matched_indices:
+                        all_results.append({"Log_Name": log_name, "Start_Time": times[idx], "End_Time": times[idx], "Signal": matched_signal, "Value": values[idx]})
+                else:
+                    # Duration check (greater than X for more than Y seconds)
+                    in_block = False
+                    block_start_t = None
+                    
+                    for i, is_true in enumerate(bool_arr):
+                        t = times[i]
+                        if is_true and not in_block:
+                            in_block = True
+                            block_start_t = t
+                        elif not is_true and in_block:
+                            in_block = False
+                            block_end_t = times[i-1]
+                            if (block_end_t - block_start_t) > duration:
+                                all_results.append({"Log_Name": log_name, "Start_Time": block_start_t, "End_Time": block_end_t, "Signal": matched_signal, "Duration": block_end_t - block_start_t})
+                    
+                    # Check last block
+                    if in_block:
+                        block_end_t = times[-1]
+                        if (block_end_t - block_start_t) > duration:
+                            all_results.append({"Log_Name": log_name, "Start_Time": block_start_t, "End_Time": block_end_t, "Signal": matched_signal, "Duration": block_end_t - block_start_t})
+            except Exception as e:
+                print(f"Error processing {file_path}: {e}")
+                
+        return pd.DataFrame(all_results), condition, matched_signal
