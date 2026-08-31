@@ -37,6 +37,18 @@ st.markdown("""
         border: 1px solid #3a7bd5;
         border-radius: 8px;
     }
+    .stChatInputContainer {
+        background-color: transparent;
+    }
+    div[data-testid="stChatInput"] {
+        background-color: #1e212b !important;
+        border: 1px solid #3a7bd5 !important;
+        border-radius: 8px !important;
+    }
+    div[data-testid="stChatInput"] textarea {
+        color: white !important;
+        background-color: transparent !important;
+    }
     .results-container {
         background: #1e212b;
         padding: 20px;

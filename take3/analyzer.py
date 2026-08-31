@@ -16,7 +16,7 @@ class LogAnalyzer:
         
         # Load LLM pipeline (on CPU)
         print(f"Loading {llm_model}...")
-        self.llm = pipeline("text-generation", model=llm_model, device="cpu", torch_dtype=torch.float32)
+        self.llm = pipeline("text-generation", model=llm_model, device="cpu", dtype=torch.float32)
         print("Model loaded.")
 
         # Read header and identify signals
