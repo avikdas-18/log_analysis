@@ -8,15 +8,25 @@ Requires:
     pip install cantools pandas openpyxl --break-system-packages
 
 Usage:
-    python dbc_to_dataframe.py path/to/file.dbc
-    python dbc_to_dataframe.py path/to/file.dbc --format xlsx
+    Just edit the CONFIG section below with your DBC file path, then run:
+        python dbc_to_dataframe.py
 """
 
-import argparse
 import sys
 
 import cantools
 import pandas as pd
+
+# ============================ CONFIG ============================
+# Hardcode your DBC file path here
+DBC_FILE_PATH = r"C:\path\to\your\file.dbc"
+
+# Output format: "csv" or "xlsx"
+OUTPUT_FORMAT = "csv"
+
+# Prefix/path for output file(s). None = same name as the DBC file.
+OUTPUT_PREFIX = None
+# ==================================================================
 
 
 def load_dbc(dbc_path: str) -> cantools.database.can.Database:
@@ -107,16 +117,8 @@ def export(dbc_path: str, out_format: str = "csv", out_prefix: str = None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Parse a DBC file into pandas DataFrames.")
-    parser.add_argument("dbc_file", help="Path to the .dbc file")
-    parser.add_argument("--format", choices=["csv", "xlsx"], default="csv",
-                         help="Output format (default: csv)")
-    parser.add_argument("--out-prefix", default=None,
-                         help="Prefix/path for output file(s) (default: same name as DBC file)")
-    args = parser.parse_args()
-
     try:
-        export(args.dbc_file, out_format=args.format, out_prefix=args.out_prefix)
+        export(DBC_FILE_PATH, out_format=OUTPUT_FORMAT, out_prefix=OUTPUT_PREFIX)
     except Exception as exc:
         print(f"Error: {exc}", file=sys.stderr)
         sys.exit(1)
