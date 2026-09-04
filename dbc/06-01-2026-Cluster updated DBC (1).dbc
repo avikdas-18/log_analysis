@@ -1,0 +1,143 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ R : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ N : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ F : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NewSignal_0020 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ dummy : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0030 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0003 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ error_code : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ reserved : 0|48@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ left_indicator : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ right_indicator : 1|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ highbeam_indicator : 5|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ cruise_indicator : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ battery_check_indicator : 9|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ odometer : 0|32@1+ (0.1,0) [0|999999] "" Vector__XXX
+ SG_ Vehicle_emergency_Stop : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Vehicle_HVIL : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ parking_light_indicator : 2|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ hazzard_indicator : 7|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ error_indicator : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2584871169 Cluster_bm_1: 8 VCU
+ SG_ engine_oil_pressure_indicator : 3|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ engine_failure_indicator : 4|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ parking_brake_indicator : 8|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ engine_temperature_indicator : 10|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ water_in_fuel_indicator : 11|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ service_indicator : 13|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_mode : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ drive_mode : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Vehicle_speed : 32|8@1+ (1,0) [0|99] "" Vector__XXX
+ SG_ Vehicle_RPM : 40|16@1+ (1,0) [0|6000] "" Vector__XXX
+ SG_ fuel_bars : 56|8@1+ (1,0) [0|10] "" Vector__XXX
+ SG_ cruise_indicator : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2584871170 Cluster_bm_2: 8 VCU
+ SG_ HTE : 32|8@1+ (0.1,0) [0|25.5] "" Vector__XXX
+ SG_ range : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SoC : 48|8@1+ (1,0) [0|10] "" Vector__XXX
+ SG_ Temperature_bars : 56|8@1+ (1,0) [0|5] "" Vector__XXX
+
+BO_ 2584871171 Cluster_bm_3: 8 VCU
+ SG_ wh_p_Km : 0|32@1+ (0.1,0) [0|0] "" Vector__XXX
+ SG_ hourmeter : 32|32@1+ (0.1,0) [0|0] "" Vector__XXX
+
+BO_ 2584871172 Cluster_bm_4: 8 VCU
+ SG_ Hydraulic_Fault_Code : 47|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ BMS_Fault_Code : 39|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GCU_fault_code : 23|16@0+ (1,0) [0|65535] "" Vector__XXX
+ SG_ MCU_Fault_Code : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ switch_screen : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Regeneration : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Vehicle_emergency_Stop : 56|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Vehicle_HVIL : 57|1@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 left_indicator "0-off  
+1-on";
+CM_ SG_ 3221225472 right_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 highbeam_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 cruise_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 battery_check_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 parking_light_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 hazzard_indicator "0-off     
+1-on";
+CM_ SG_ 3221225472 error_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 engine_oil_pressure_indicator "0-off     
+1-on
+";
+CM_ SG_ 2584871169 engine_failure_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 parking_brake_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 engine_temperature_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 water_in_fuel_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 service_indicator "0-off     
+1-on";
+CM_ SG_ 2584871169 Speed_mode "0-eco 
+1-power ";
+CM_ SG_ 2584871169 drive_mode "
+2-Forward 
+1-reverse 
+0-neutral ";
+CM_ SG_ 2584871169 Vehicle_speed "Speed in Kms";
+CM_ SG_ 2584871169 cruise_indicator "0-off     
+1-on";
+CM_ SG_ 2584871172 switch_screen "0 - Day Theme(default)
+1 - Night Theme
+";
+CM_ SG_ 2584871172 Regeneration "0 - Off\t
+1 - On";
+CM_ SG_ 2584871172 Vehicle_emergency_Stop "0 - Off\t1 - On";
+CM_ SG_ 2584871172 Vehicle_HVIL "0 - Off\t1 - On";
+

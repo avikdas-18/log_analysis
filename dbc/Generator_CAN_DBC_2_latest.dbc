@@ -1,0 +1,153 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: MCU VCU
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ New_Signal_88 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_87 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_86 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Reverse_Mode : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Forward_Mode : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Brake_Mode : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Cruise_Mode : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Msge2_Reserved1 : 0|3@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Motor_Stall_fault : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Motor_Controller_Fault : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Motor_Fault : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Msge2_Reserved2 : 0|5@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ Motor_Phase_Loss : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Position_Sensor_Fault : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Throttle_Fault : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Under_Voltage : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Over_Voltage : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Controller_Over_Temp : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Phase_Wire_Short : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mosfet_Protection : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Phase_Curr_Rms : 0|16@0+ (1,0) [0|65535] "A" Vector__XXX
+ SG_ Direction : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mode_A_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mode_B_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mode_C_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mode_D_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Cruise_Mode_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Brake_Mode_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Msge3_Reserved1 : 0|1@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ Hill_Assist_Mode_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Regen_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Mage3_Reserved2 : 0|6@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ Derating_Status : 0|8@0+ (1,0) [0|255] "NA" Vector__XXX
+ SG_ Direction_Signal : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Act_Regen_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ Neut_Regen_Enable : 0|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ VCU_Msge1_Reserved1 : 0|2@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ VCU_Msge1_Reserved2 : 0|40@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ Regen_Value_Active : 0|16@0+ (1,0) [0|100] "%" Vector__XXX
+ SG_ Regen_Value_Neutral : 0|16@0+ (1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_Msge2_Reserved1 : 0|32@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ ModeA_Speed_Limit : 0|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+ SG_ ModeB_Speed_Limit : 0|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+ SG_ ModeC_Speed_Limit : 0|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+ SG_ ModeD_Speed_Limit : 0|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+ SG_ GC_RESERVED2 : 0|16@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ New_Signal_93 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2418147493 GCU_Msge6: 8 Vector__XXX
+ SG_ GC_RESERVED_3 : 23|48@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DERATING_STATUS : 7|16@0+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 2418147491 GCU_Msge4: 8 Vector__XXX
+ SG_ vehicle_feature : 55|16@0+ (1,0) [0|65535] "" Vector__XXX
+ SG_ Cumulative_Displacement : 23|32@0+ (1,0) [0|4294967296] "KM" Vector__XXX
+ SG_ GC_PH_CURR : 7|16@0+ (1,0) [0|65535] "A" Vector__XXX
+
+BO_ 2418147490 GCU_Msge3: 8 Vector__XXX
+ SG_ Product_Id : 7|16@0+ (1,0) [0|65535] "NA" Vector__XXX
+ SG_ Serial_Id : 23|32@0+ (1,0) [0|4294967296] "NA" Vector__XXX
+ SG_ Version_Info : 55|16@0+ (1,0) [0|65535] "NA" Vector__XXX
+
+BO_ 2418147488 GCU_Msge1: 8 MCU
+ SG_ THROTTLE_PERC : 31|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GC_DC_VOLT : 55|16@0+ (0.1,0) [0|6553.5] "V" Vector__XXX
+ SG_ GC_RESERVED : 7|8@0+ (1,0) [0|255] "NA" Vector__XXX
+ SG_ GC_GENERATOR_TEMP : 15|8@0+ (1,0) [0|255] "deg.Cel" Vector__XXX
+ SG_ GC_CNTRL_TEMP : 23|8@0+ (1,0) [0|255] "deg.Cel" Vector__XXX
+ SG_ GC_DC_CURR : 39|16@0+ (0.1,0) [0|6553.5] "A" Vector__XXX
+
+BO_ 2418147489 GCU_Msge2: 8 MCU
+ SG_ GC_STATUS_FBACK2 : 47|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GC_STATUS_FBACK1 : 55|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GC_FAULT_ALRAMS : 63|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GC_GENERATOR_SPEED_MODE : 7|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ GC_GENERATOR_SPEED : 15|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+ SG_ GC_GENERATOR_SPD_LIM : 31|16@0+ (1,0) [0|65535] "RPM" Vector__XXX
+
+BO_ 2418147492 GCU_Msge5: 8 MCU
+ SG_ GC_RESERVED2 : 47|24@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ GC_ABIST_RESERVED1 : 39|2@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ GC_OBD_CODE : 7|16@0+ (1,0) [0|65535] "NA" Vector__XXX
+ SG_ GC_MBIST_IVDMTRPARAMS : 16|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_DEVLOCK : 17|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_PHCUROFFSET : 18|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_POSSEN : 19|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_HWOC : 20|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_SWOC : 21|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_MTRCTLOOP : 22|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_CURSETPNT : 23|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_MTRPHIMB : 24|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_MTRSTALL : 25|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_WTCHDG : 26|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_LOOPSAT : 27|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_LOOPOSCIL : 28|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_MBIST_RESERVE : 31|3@0+ (1,0) [0|0] "NA" Vector__XXX
+ SG_ GC_ABIST_IVDFEAPARAM : 32|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_ABIST_CMD : 33|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_ABIST_BRDOT : 34|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_ABIST_MTROT : 35|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_ABIST_LNOV : 36|1@0+ (1,0) [0|1] "NA" Vector__XXX
+ SG_ GC_ABIST_LNUV : 37|1@0+ (1,0) [0|1] "NA" Vector__XXX
+
+BO_ 2418147504 VCU_Msge1: 8 VCU
+ SG_ GC_DC_CURR_PERC_IN : 7|16@0+ (0.1,0) [0|65535] "A" Vector__XXX
+ SG_ GC_OPERATION_STATE : 23|8@0+ (1,0) [0|255] "NA" Vector__XXX
+ SG_ GC_RESERVED3 : 31|40@0+ (1,0) [0|0] "NA" Vector__XXX
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BusType" "CAN";
+

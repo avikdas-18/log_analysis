@@ -1,0 +1,96 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+VAL_TABLE_ Fail_Grade 3 "Shut down MCU" 2 "Zero torque output" 1 "Warning derated" 0 "No Fault" ;
+VAL_TABLE_ Hill_hold 3 "Error" 2 "Reserved" 1 "Hill hold active" 0 "Hill hold Inactive" ;
+
+
+BO_ 2365523439 TM_VCU_command: 8 Vector__XXX
+ SG_ MCU_enable : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Faultreset : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Control_mode : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Gear : 4|2@1+ (1,0) [0|3] "0" Vector__XXX
+ SG_ Footbrake : 6|1@1+ (1,0) [0|1] "0" Vector__XXX
+ SG_ Handbrake : 7|1@1+ (1,0) [0|1] "0" Vector__XXX
+ SG_ Speedupperlimit : 8|12@1+ (4,0) [0|16380] "rpm" Vector__XXX
+ SG_ Speedlowerlimit : 20|12@1+ (4,0) [0|16380] "rpm" Vector__XXX
+ SG_ DemandTorque : 32|16@1+ (1,-5000) [-5000|60535] "Nm" Vector__XXX
+ SG_ Demandspeed : 48|16@1+ (1,-15000) [-15000|50535] "rpm" Vector__XXX
+
+BO_ 2365521925 TM_MCU_STATUS_1: 8 Vector__XXX
+ SG_ Motorspeed : 0|16@1+ (1,-15000) [-15000|50535] "rpm" Vector__XXX
+ SG_ MotorTorque : 16|16@1+ (1,-5000) [-5000|60535] "Nm" Vector__XXX
+ SG_ MotorACCurrent : 32|16@1+ (0.1,0) [0|6553.5] "A" Vector__XXX
+ SG_ Precharge_Allow : 52|1@1+ (1,0) [0|1] "0" Vector__XXX
+ SG_ Active_Discharge_Enable_Feedback : 53|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IGBT_Enable_Feedback : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Lifecounter : 60|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 2365522181 TM_MCU_STATUS_2: 8 Vector__XXX
+ SG_ Motortemperature : 0|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+ SG_ MCUtemperature : 8|8@1+ (1,-40) [-40|215] "dec^C" Vector__XXX
+ SG_ TorquelimitHIGH : 16|16@1+ (1,0) [0|65535] "Nm" Vector__XXX
+ SG_ TorquelimitLow : 32|16@1+ (1,-5000) [-5000|60535] "Nm" Vector__XXX
+ SG_ Failgrade : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Lifecounter : 60|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 2365522437 TM_MCU_STATUS_3: 8 Vector__XXX
+ SG_ Faultcode : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Alarmcode : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ DCCurrentA : 16|16@1+ (1,-1000) [-1000|64535] "A" Vector__XXX
+ SG_ DCVoltageV : 32|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
+ SG_ Lifecounter : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+
+
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 2365522181 50;
+BA_ "GenMsgCycleTime" BO_ 2365522437 100;
+VAL_ 2365523439 MCU_enable 0 "disable" 1 "enable" ;
+VAL_ 2365523439 Faultreset 0 "disable" 1 "enable" ;
+VAL_ 2365523439 Control_mode 0 "reserved" 1 "speed control" 2 "torque control" 3 "active discharge" ;
+VAL_ 2365523439 Gear 0 "neutral" 1 "drive" 2 "reverse" ;
+VAL_ 2365523439 Footbrake 0 "No_footbrake" 1 "Footbrake" ;
+VAL_ 2365523439 Handbrake 0 "No handbrake" 1 "Handbrake" ;
+VAL_ 2365521925 Precharge_Allow 0 "disable" 1 "enable" ;
+VAL_ 2365521925 Active_Discharge_Enable_Feedback 0 "disable" 1 "enable" ;
+VAL_ 2365521925 IGBT_Enable_Feedback 0 "disable" 1 "enable" ;
+VAL_ 2365522181 Failgrade 3 "Shut down MCU" 2 "Zero torque output" 1 "Warning derated" 0 "No Fault" ;
+

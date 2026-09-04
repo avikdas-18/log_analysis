@@ -1,0 +1,562 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: BMU ACU
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ NewSignal_0023 : 0|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0083 : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MS_SOC : 0|8@0+ (0.5,0) [0|100] "%" Vector__XXX
+ SG_ MS_Charge_Current_Limit : 0|16@0- (0.125,0) [-4000|4000] "A" Vector__XXX
+ SG_ MS_Discharge_Current_Limit : 0|16@0- (0.125,0) [-4000|4000] "A" Vector__XXX
+ SG_ MS_Operating_State : 0|5@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ MS_DTC_Accommodation : 0|3@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Connect_Voltage_Flag : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Desired_MS_BMS_State : 0|4@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ command_type : 0|4@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ext_E_Stop : 0|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ reset_latched_DTCs : 0|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ String_Bit_Map : 0|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Aux_Command_Bit_Map : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ T_min_Connected : 0|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_max_Connected : 0|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_min_Global : 0|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_max_Global : 0|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ V_min_Connected : 0|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_max_Connected : 0|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_min_Global : 0|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_max_Global : 0|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ MS_Pack_Voltage : 0|16@0- (0.0625,0) [0|2047] "V" Vector__XXX
+ SG_ MS_Pack_Current : 0|16@0- (0.125,0) [-4000|-4000] "A" Vector__XXX
+
+BO_ 2566902531 IMD_InfoVoltage: 8 Vector__XXX
+ SG_ IMD_G_Voltage_Counter : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ IMD_G_Voltage_HVpos_Earth : 32|8@1+ (0.05,-1606) [-1150|1150] "v" Vector__XXX
+ SG_ IMD_G_Voltage_HVneg_Earth : 16|16@1+ (0.05,-1606) [-1150|1150] "V" Vector__XXX
+ SG_ IMD_G_Voltage_HV : 0|16@1+ (0.05,-1606) [-1150|1150] "V" Vector__XXX
+
+BO_ 2566902275 IMD_InfoIsolationDetail: 8 Vector__XXX
+ SG_ IMD_G_Isolation_Quality : 56|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ IMD_G_Isolation_Counter_Detail : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ IMD_G_Isolation_R_iso_Original : 32|16@1+ (1,0) [0|64255] "kOhm" Vector__XXX
+ SG_ IMD_G_Isolation_R_iso_pos : 16|16@1+ (1,0) [0|50000] "kOhm" Vector__XXX
+ SG_ IMD_G_Isolation_R_iso_neg : 0|16@1+ (1,0) [0|50000] "kOhm" Vector__XXX
+
+BO_ 2566902019 IMD_InfoGeneral: 8 Vector__XXX
+ SG_ IMD_G_Device_Activity : 48|8@1+ (1,0) [0|4] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit15 : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit14 : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit13 : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit12 : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit11 : 43|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit10 : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit09 : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit08 : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit07 : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit06 : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit05 : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit04 : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit03 : 35|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit02 : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit01 : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Warning_Alarm_Status_Bit00 : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IMD_G_Isolation_Counter : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ IMD_G_Isolation_R_iso_Status : 16|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ IMD_G_Isolation_R_iso_Corrected : 0|16@1+ (1,0) [0|37500] "kOhm" Vector__XXX
+
+BO_ 2566848515 SOC_Message: 7 BMU
+ SG_ BMS_Heartbeat_Sig : 55|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SOC : 7|8@0+ (0.5,0) [0|100] "%" Vector__XXX
+ SG_ Charging_Current_Limit : 15|16@0- (0.125,0) [-4000|4000] "A" Vector__XXX
+ SG_ Discharging_Current_Limit : 31|16@0- (0.125,0) [-4000|4000] "A" Vector__XXX
+ SG_ BMU_Operating_State : 44|5@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DTC_Accomodation : 47|3@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566848771 Pack_Voltage_Current: 8 BMU
+ SG_ Unswitched_Pack_Voltage : 7|16@0- (0.0625,0) [0|2047] "V" Vector__XXX
+ SG_ Pack_Current : 23|16@0- (0.125,0) [-4000|4000] "A" Vector__XXX
+ SG_ Switched_Pack_Voltage : 39|16@0- (0.0625,0) [0|2047] "V" Vector__XXX
+ SG_ Main_Positive_Contactor_cmd : 48|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Main_Negative_Contactor_cmd : 49|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ PreCharge_Contactor_cmd : 50|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Charge_Contactor_cmd : 51|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Mcu_Contactor_cmd : 52|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Main_Positive_Contactor_Status : 56|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Main_Contactor_Negative_Status : 57|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ PreCharge_Contactor_Status : 58|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Charge_Contactor_Status : 59|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Mcu_Contactor_Status : 60|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ignition_Pin_Status : 61|1@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566849027 Min_Max_Voltage: 8 BMU
+ SG_ V_min : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_max : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_min_ID : 39|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ V_max_ID : 55|16@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566849283 Min_Max_Temperature: 8 BMU
+ SG_ T_min : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_max : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_average : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_min_ID : 55|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ T_max_ID : 63|8@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566849539 DTC_Accommodation: 8 BMU
+ SG_ Active_Fault_1 : 7|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_2 : 15|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_3 : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_4 : 31|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_5 : 39|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_6 : 47|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_7 : 55|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_8 : 63|8@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566849795 BMU_Configuration: 8 BMU
+ SG_ Interface_Version : 7|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ App_ID : 15|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Build_cfg_ID : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ ECU_DB_ID : 31|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Number_of_Cell_Groups : 47|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Number_of_temperatures : 63|8@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566850051 Amp_hours: 8 BMU
+ SG_ Amp_hour_charging : 7|32@0+ (0.1,0) [0|0] "Ah" Vector__XXX
+ SG_ Amp_hour_discharging : 39|32@0+ (0.1,0) [0|0] "Ah" Vector__XXX
+
+BO_ 2566850307 Operating_Limits: 8 BMU
+ SG_ Min_Pack_Voltage : 7|16@0+ (0.0625,0) [0|2047] "V" Vector__XXX
+ SG_ Max_Pack_Voltage : 23|16@0+ (0.0625,0) [0|2047] "V" Vector__XXX
+ SG_ Min_Cell_Voltage : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ Max_Cell_Voltage : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566852611 Cell_Voltages_1: 8 BMU
+ SG_ V_0 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_1 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_2 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_3 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566852867 Cell_Voltages_2: 8 BMU
+ SG_ V_4 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_5 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_6 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_7 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566853123 Cell_Voltages_3: 8 BMU
+ SG_ V_8 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_9 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_10 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_11 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566853379 Cell_Voltages_4: 8 BMU
+ SG_ V_12 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_13 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_14 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_15 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566853635 Cell_Voltages_5: 8 BMU
+ SG_ V_16 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_17 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_18 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_19 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566853891 Cell_Voltages_6: 8 BMU
+ SG_ V_20 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_21 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_22 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_23 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566854147 Cell_Voltages_7: 8 BMU
+ SG_ V_24 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_25 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_26 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_27 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566854403 Cell_Voltages_8: 8 BMU
+ SG_ V_28 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_29 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_30 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_31 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566854659 Cell_Voltages_9: 8 BMU
+ SG_ V_32 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_33 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_34 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_35 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566854915 Cell_Voltages_10: 8 BMU
+ SG_ V_36 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_37 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_38 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_39 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566855171 Cell_Voltages_11: 8 BMU
+ SG_ V_40 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_41 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_42 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_43 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566855427 Cell_Voltages_12: 8 BMU
+ SG_ V_44 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_45 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_46 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_47 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566855683 Cell_Voltages_13: 8 BMU
+ SG_ V_48 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_49 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_50 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_51 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566855939 Cell_Voltages_14: 8 BMU
+ SG_ V_52 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_53 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_54 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_55 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566856195 Cell_Voltages_15: 8 BMU
+ SG_ V_56 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_57 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_58 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_59 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566856451 Cell_Voltages_16: 8 BMU
+ SG_ V_60 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_61 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_62 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_63 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566856707 Cell_Voltages_17: 8 BMU
+ SG_ V_64 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_65 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_66 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_67 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566856963 Cell_Voltages_18: 8 BMU
+ SG_ V_68 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_69 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_70 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_71 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566857219 Cell_Voltages_19: 8 BMU
+ SG_ V_72 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_73 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_74 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_75 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566857475 Cell_Voltages_20: 8 BMU
+ SG_ V_76 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_77 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_78 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_79 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566857731 Cell_Voltages_21: 8 BMU
+ SG_ V_80 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_81 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_82 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_83 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566857987 Cell_Voltages_22: 8 BMU
+ SG_ V_84 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_85 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_86 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_87 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566858243 Cell_Voltages_23: 8 BMU
+ SG_ V_88 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_89 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_90 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_91 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566858499 Cell_Voltages_24: 8 BMU
+ SG_ V_92 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_93 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_94 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_95 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566858755 Cell_Voltages_25: 8 BMU
+ SG_ V_96 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_97 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_98 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_99 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566859011 Cell_Voltages_26: 8 BMU
+ SG_ V_100 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_101 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_102 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_103 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566859267 Cell_Voltages_27: 8 BMU
+ SG_ V_104 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_105 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_106 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_107 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566859523 Cell_Voltages_28: 8 BMU
+ SG_ V_108 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_109 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_110 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_111 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566859779 Cell_Voltages_29: 8 BMU
+ SG_ V_112 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_113 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_114 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_115 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566860035 Cell_Voltages_30: 8 BMU
+ SG_ V_116 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_117 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_118 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_119 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566860291 Cell_Voltages_31: 8 BMU
+ SG_ V_120 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_121 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_122 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_123 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566860547 Cell_Voltages_32: 8 BMU
+ SG_ V_124 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_125 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_126 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_127 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566860803 Cell_Voltages_33: 8 BMU
+ SG_ V_128 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_129 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_130 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_131 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566861059 Cell_Voltages_34: 8 BMU
+ SG_ V_132 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_133 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_134 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_135 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566861315 Cell_Voltages_35: 8 BMU
+ SG_ V_136 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_137 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_138 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_139 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566861571 Cell_Voltages_36: 8 BMU
+ SG_ V_140 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_141 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_142 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_143 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566861827 Cell_Voltages_37: 8 BMU
+ SG_ V_144 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_145 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_146 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_147 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566862083 Cell_Voltages_38: 8 BMU
+ SG_ V_148 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_149 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_150 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_151 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566862339 Cell_Voltages_39: 8 BMU
+ SG_ V_152 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_153 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_154 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_155 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566862595 Cell_Voltages_40: 8 BMU
+ SG_ V_156 : 7|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_157 : 23|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_158 : 39|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+ SG_ V_159 : 55|16@0+ (0.000122,0) [0|4] "V" Vector__XXX
+
+BO_ 2566885379 Cell_Temperatures_1: 8 BMU
+ SG_ T_0 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_1 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_2 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_3 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566885635 Cell_Temperatures_2: 8 BMU
+ SG_ T_4 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_5 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_6 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_7 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566885891 Cell_Temperatures_3: 8 BMU
+ SG_ T_8 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_9 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_10 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_11 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566886147 Cell_Temperatures_4: 8 BMU
+ SG_ T_12 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_13 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_14 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_15 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566886403 Cell_Temperatures_5: 8 BMU
+ SG_ T_16 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_17 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_18 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_19 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566886659 Cell_Temperatures_6: 8 BMU
+ SG_ T_20 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_21 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_22 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_23 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566886915 Cell_Temperatures_7: 8 BMU
+ SG_ T_24 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_25 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_26 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_27 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566887171 Cell_Temperatures_8: 8 BMU
+ SG_ T_28 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_29 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_30 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_31 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566887427 Cell_Temperatures_9: 8 BMU
+ SG_ T_32 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_33 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_34 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_35 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566887683 Cell_Temperatures_10: 8 BMU
+ SG_ T_36 : 7|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_37 : 23|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_38 : 39|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+ SG_ T_39 : 55|16@0- (0.015625,0) [-200|200] "°C" Vector__XXX
+
+BO_ 2566901763 Cell_Balance: 8 BMU
+ SG_ CB_0 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_1 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_2 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_3 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_4 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_5 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_6 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CB_7 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2565800948 Application_Command_Message: 4 ACU
+ SG_ DC_CHARGER_CONNECTED : 11|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Reset_OV : 10|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Reset_UV : 9|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Desired_BMU_State : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Command_Type : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ VCU_HVIL : 8|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ External_E_Stop : 16|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Transmit_Cell_Voltage_Messages : 17|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Transmit_Temperature_Messages : 18|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Transmit_CellBalance_Messages : 19|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Reset_Latched_DTCs : 20|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Igntion_Command : 21|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Application_Heartbeat : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 2566902531 IMD_G_Voltage_Counter "ValueType: Identifier = 133, Name = SAEct03";
+CM_ SG_ 2566902531 IMD_G_Voltage_HVpos_Earth "ValueType: Identifier = 461, Name = SAEfq04";
+CM_ SG_ 2566902531 IMD_G_Voltage_HVneg_Earth "ValueType: Identifier = 461, Name = SAEfq04";
+CM_ SG_ 2566902531 IMD_G_Voltage_HV "ValueType: Identifier = 461, Name = SAEfq04";
+CM_ SG_ 2566902275 IMD_G_Isolation_Quality "ValueType: Identifier = 46, Name = SAEpc06";
+CM_ SG_ 2566902275 IMD_G_Isolation_Counter_Detail "ValueType: Identifier = 133, Name = SAEct03";
+CM_ SG_ 2566902275 IMD_G_Isolation_R_iso_Original "ValueType: Identifier = 383, Name = SAErs02";
+CM_ SG_ 2566902275 IMD_G_Isolation_R_iso_pos "ValueType: Identifier = 383, Name = SAErs02";
+CM_ SG_ 2566902275 IMD_G_Isolation_R_iso_neg "ValueType: Identifier = 383, Name = SAErs02";
+CM_ SG_ 2566902019 IMD_G_Device_Activity "ValueType: Identifier = 129, Name = SAEct02";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit15 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit14 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit13 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit12 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit11 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit10 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit09 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit08 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit07 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit06 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit05 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit04 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit03 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit02 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit01 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Warning_Alarm_Status_Bit00 "ValueType: Identifier = 86, Name = SAEbs01";
+CM_ SG_ 2566902019 IMD_G_Isolation_Counter "ValueType: Identifier = 133, Name = SAEct03";
+CM_ SG_ 2566902019 IMD_G_Isolation_R_iso_Status "ValueType: Identifier = 87, Name = SAEbs02";
+CM_ SG_ 2566902019 IMD_G_Isolation_R_iso_Corrected "ValueType: Identifier = 383, Name = SAErs02";
+CM_ BO_ 2566848515 "Periodicity = 100ms";
+CM_ BO_ 2566848771 "Periodicity = 100ms";
+CM_ BO_ 2566849027 "Periodicity = 100ms";
+CM_ BO_ 2566849283 "Periodicity = 1000ms";
+CM_ BO_ 2566849539 "Periodicity = 200ms, or upon any change";
+CM_ BO_ 2566849795 "Periodicity = 5000ms";
+CM_ BO_ 2566850051 "Periodicity = 10000ms";
+CM_ BO_ 2566850307 "Periodicity = 1000ms";
+CM_ BO_ 2566852611 "Periodicity = 200ms, 
+*Always transmit enabled in BMU configuration or request to transmit is on set in the Application Command Message. All Cell Voltage Messages are same
+";
+CM_ BO_ 2566885379 "Periodicity = 2000ms, 
+*Always transmit enabled in BMU configuration or request to transmit is on set in the Application Command Message. All Cell Temperature Messages are same
+";
+CM_ BO_ 2566901763 "Periodicity = 50ms, 
+*Always transmit enabled in BMU configuration or request to transmit is on set in the Application Command Message. 
+";
+CM_ BO_ 2565800948 "Periodicity = 100ms";
+CM_ SG_ 2565800948 Command_Type "Must be set to \"0000\" indicating “Application Command Message”";
+CM_ SG_ 2565800948 External_E_Stop "Set to ‘1’, the BMU performs an emergency stop procedure. ";
+CM_ SG_ 2565800948 Transmit_Cell_Voltage_Messages "Set to ‘1’, the BMU will transmit the cell Voltage Messages";
+CM_ SG_ 2565800948 Transmit_Temperature_Messages "Set to ‘1’, the BMU will transmit the Temperature Messages";
+CM_ SG_ 2565800948 Transmit_CellBalance_Messages "Set to ‘1’, the BMU will transmit the Cell-Balance Messages";
+CM_ SG_ 2565800948 Reset_Latched_DTCs "Transition from ‘0’ to ‘1’, the BMU shall reset the state of any active DTCs that are latched (i.e. not auto-cleared).";
+CM_ SG_ 2565800948 Igntion_Command "When enabled through the BMS Configuration, sets the state of the Aux Output pin";
+VAL_ 2566848515 SOC 255 "Unknown" ;
+VAL_ 2566848515 BMU_Operating_State 2 "IDLE/POWER-DOWN READY" 3 "PRE-CHARGE" 4 "READY DISCHARGE" 5 "READY CHARGE" ;
+VAL_ 2566848771 Main_Positive_Contactor_cmd 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 Main_Negative_Contactor_cmd 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 PreCharge_Contactor_cmd 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 Charge_Contactor_cmd 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 Mcu_Contactor_cmd 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 Main_Positive_Contactor_Status 0 "Open" 1 "Closed" ;
+VAL_ 2566848771 Main_Contactor_Negative_Status 1 "Closed" 0 "Open" ;
+VAL_ 2566848771 PreCharge_Contactor_Status 1 "Closed" 0 "Open" ;
+VAL_ 2566848771 Charge_Contactor_Status 1 "Closed" 0 "Open" ;
+VAL_ 2566848771 Mcu_Contactor_Status 1 "Closed" 0 "Open" ;
+VAL_ 2566848771 Ignition_Pin_Status 1 "Closed" 0 "Open" ;
+VAL_ 2565800948 Desired_BMU_State 2 "IDLE/POWER-DOWN READY" 3 "PRE-CHARGE" 4 "READY DISCHARGE" 5 "READY CHARGE" ;
+VAL_ 2565800948 VCU_HVIL 0 "Open" 1 "Closed" ;
+
