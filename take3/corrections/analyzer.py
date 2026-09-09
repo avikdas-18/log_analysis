@@ -51,7 +51,7 @@ class LogAnalyzer:
             "The JSON must contain exactly these keys:\n"
             "- \"signal\": The name of the signal being queried (string).\n"
             "- \"conditions\": A list of condition objects, where each object has:\n"
-            "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==').\n"
+            "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==', '!=').\n"
             "   - \"value\": The numerical threshold value (float).\n"
             "- \"duration\": The duration in seconds the condition must hold (float). If not specified, use 0.0.\n\n"
             "Example:\n"
@@ -127,6 +127,8 @@ class LogAnalyzer:
                         bool_arr &= (values <= thresh)
                     elif op == '==':
                         bool_arr &= (values == thresh)
+                    elif op == '!=':
+                        bool_arr &= (values != thresh)
                     else:
                         raise ValueError(f"Unknown operator {op}")
                     
