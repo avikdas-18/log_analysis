@@ -41,12 +41,12 @@ st.markdown("""
         background-color: transparent;
     }
     div[data-testid="stChatInput"] {
-        background-color: black !important;
+        background-color: white !important;
         border: 1px solid #3a7bd5 !important;
         border-radius: 8px !important;
     }
     div[data-testid="stChatInput"] textarea {
-        color: white !important;
+        color: black !important;
         background-color: transparent !important;
     }
     .results-container {
