@@ -51,12 +51,14 @@ class LogAnalyzer:
             "The JSON must contain exactly these keys:\n"
             "- \"signal\": The name of the signal being queried (string).\n"
             "- \"conditions\": A list of condition objects, where each object has:\n"
-            "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==', '!=').\n"
+            "   - \"operator\": The mathematical operator (must be one of '>', '<', '>=', '<=', '==', '!='). Map 'not equal' to '!='.\n"
             "   - \"value\": The numerical threshold value (float).\n"
             "- \"duration\": The duration in seconds the condition must hold (float). If not specified, use 0.0.\n\n"
-            "Example:\n"
+            "Examples:\n"
             "User: \"Give me logs where GC_DC_CURR is greater than 7A and less than 10A\"\n"
             "Assistant: {\"signal\": \"GC_DC_CURR\", \"conditions\": [{\"operator\": \">\", \"value\": 7.0}, {\"operator\": \"<\", \"value\": 10.0}], \"duration\": 0.0}\n\n"
+            "User: \"Show me logs where GC_OBD_CODE is not equal to 0\"\n"
+            "Assistant: {\"signal\": \"GC_OBD_CODE\", \"conditions\": [{\"operator\": \"!=\", \"value\": 0.0}], \"duration\": 0.0}\n\n"
             "Respond ONLY with the JSON object. Do not add markdown or explanations."
         )
         
